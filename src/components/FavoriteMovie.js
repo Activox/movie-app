@@ -12,17 +12,17 @@ function FavoriteMovie({
   poster_path,
   overview,
   vote_average,
+  release_date,
 }) {
   const [favorite, setFovorite] = useRecoilState(isFavorite);
   function handleFavoriteClick() {
-
     let favoriteMovies = favorite;
     const listOfFavoriteMovies = Object.entries(favorite).map(
       (movie) => movie[1]
     );
     const isMovieFavoriteListed =
-      listOfFavoriteMovies.filter((fav) => fav.id === movieId).length > 0;
-      
+      listOfFavoriteMovies.filter((fav) => fav.id === movieId).length;
+
     if (isMovieFavoriteListed) {
       favoriteMovies = listOfFavoriteMovies.filter(
         (movie) => movie.id !== movieId
@@ -39,6 +39,7 @@ function FavoriteMovie({
           poster_path,
           overview,
           vote_average,
+          release_date,
         },
       });
     }
@@ -49,7 +50,7 @@ function FavoriteMovie({
   if (!isFavoriteListEmpty) {
     let favorite_movie_list = Object.entries(favorite).map((movie) => movie[1]);
     isMovieFavorite =
-      favorite_movie_list.filter((fav) => fav.id === movieId).length > 0;
+      favorite_movie_list.filter((fav) => fav.id === movieId).length;
   }
 
   return (
@@ -69,6 +70,7 @@ FavoriteMovie.propTypes = {
   poster_path: PropTypes.string,
   overview: PropTypes.string,
   vote_average: PropTypes.number,
+  release_date: PropTypes.string,
 };
 
 export default FavoriteMovie;

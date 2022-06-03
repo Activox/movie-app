@@ -7,7 +7,14 @@ import Raiting from "./Raiting";
 import FavoriteMovie from "./FavoriteMovie";
 import MovieImage from "./MovieImage";
 
-function Movie({ id: movieId, title, poster_path, overview, vote_average }) {
+function Movie({
+  id: movieId,
+  title,
+  poster_path,
+  overview,
+  vote_average,
+  release_date,
+}) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   function handleImageClick() {
@@ -19,7 +26,14 @@ function Movie({ id: movieId, title, poster_path, overview, vote_average }) {
       {isModalOpen && (
         <OverviewMovieDetail
           isModalOpen={isModalOpen}
-          {...{ movieId, title, poster_path, overview, vote_average }}
+          {...{
+            movieId,
+            title,
+            poster_path,
+            overview,
+            vote_average,
+            release_date,
+          }}
           onModalClose={() => {
             setModalOpen(false);
           }}
@@ -35,7 +49,14 @@ function Movie({ id: movieId, title, poster_path, overview, vote_average }) {
           <Raiting key={`raiting-${movieId}`} vote_average={vote_average} />
           <FavoriteMovie
             key={`favorite-${movieId}`}
-            {...{ movieId, title, poster_path, overview, vote_average }}
+            {...{
+              movieId,
+              title,
+              poster_path,
+              overview,
+              vote_average,
+              release_date,
+            }}
           />
         </div>
       </div>
@@ -49,6 +70,7 @@ Movie.propTypes = {
   poster_path: PropTypes.string,
   overview: PropTypes.string,
   vote_average: PropTypes.number,
+  release_date: PropTypes.string,
 };
 
 export default Movie;

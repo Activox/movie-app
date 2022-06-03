@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Movie from "./Movie";
-// import FavoriteMoviesList from "./FavoriteMoviesList";
 import SortFilter from "./SortFilter";
 
 import { useRecoilValue } from "recoil";
@@ -29,9 +28,8 @@ function MovieList({ movies }) {
 
   if (!isFavoriteListEmpty) {
     favorite_movie_list = favMovieList.map((movie) => movie[1]);
-
     favorite_movie_list.sort((a, b) =>
-      SORT_BY_NAME[popularSort] === "title"
+      SORT_BY_NAME[favoriteSort] === "title"
         ? (a[SORT_BY_NAME[favoriteSort]] > b[SORT_BY_NAME[favoriteSort]] &&
             1) ||
           -1
@@ -41,35 +39,34 @@ function MovieList({ movies }) {
     );
   }
 
+  function renderList(listName, movieList) {
+    return (
+      <div>
+        <div className=" p-2 m-2 flex justify-between place-items-center">
+          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-xl">
+            {listName}
+          </p>
+          <SortFilter
+            onSort={(sortBy) =>
+              listName === "Favorite List"
+                ? setFavoriteSort(sortBy)
+                : setPopularSort(sortBy)
+            }
+          />
+        </div>
+        <div className="flex flex-wrap justify-center place-content-center gap-8">
+          {movieList.map((movie) => (
+            <Movie key={movie.id} {...movie} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="lg:text-center ">
-      {!isFavoriteListEmpty && (
-        <div>
-          <div className=" p-2 m-2 flex justify-between place-items-center">
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-xl">
-              Favorite List
-            </p>
-            <SortFilter onSort={(sortBy) => setFavoriteSort(sortBy)} />
-          </div>
-          <div className="flex flex-wrap justify-center place-content-center gap-8">
-            {favorite_movie_list.map((movie) => (
-              <Movie key={movie.id} {...movie} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className=" p-2 m-2 flex justify-between place-items-center">
-        <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-xl">
-          Popular List
-        </p>
-        <SortFilter onSort={(sortBy) => setPopularSort(sortBy)} />
-      </div>
-      <div className="flex flex-wrap justify-center place-content-center gap-8">
-        {popular_movie_list.map((movie) => (
-          <Movie key={movie.id} {...movie} />
-        ))}
-      </div>
+      {!isFavoriteListEmpty && renderList("Favorite List", favorite_movie_list)}
+      {renderList("Popular List", popular_movie_list)}
     </div>
   );
 }

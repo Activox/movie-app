@@ -14,6 +14,7 @@ function OverviewMovieDetail({
   poster_path,
   overview,
   vote_average,
+  release_date,
 }) {
   const [open, setOpen] = useState(isModalOpen);
 
@@ -75,6 +76,7 @@ function OverviewMovieDetail({
                               poster_path,
                               overview,
                               vote_average,
+                              release_date,
                             }}
                           />
                         </div>
@@ -102,6 +104,7 @@ OverviewMovieDetail.propTypes = {
   poster_path: PropTypes.string,
   overview: PropTypes.string,
   vote_average: PropTypes.number,
+  release_date: PropTypes.string,
 };
 
 export default OverviewMovieDetail;
