@@ -2,7 +2,7 @@
 
 This Movie App shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with ReactJs. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/create-react-app).
 
-##Demo
+## Demo
 
 [![](https://img.shields.io/badge/-Demo-blue)](https://movie-app-inky-kappa.vercel.app/)
 
